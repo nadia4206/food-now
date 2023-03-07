@@ -1,19 +1,44 @@
-import { useState, useEffect } from "react";
+
+import { Routes, Route } from 'react-router-dom';
+import Welcome from './components/Welcome';
+import SignUp from './components/SignUp';
+import Login from './components/Login';
+import Profile from './components/Profile';
+import HomePage from './components/HomePage'
+import RestaurantCards from './components/RestaurantCards';
+import Restaurant from './components/Restaurant'
+import RestaurantItems from './components/RestaurantItems';
+import Cart from './components/Cart'
+import OrderHistory from './components/OrderHistory'
 
 function App() {
-  const [count, setCount] = useState(0);
-
-  useEffect(() => {
-    fetch("/hello")
-      .then((r) => r.json())
-      .then((data) => setCount(data.count));
-  }, []);
 
   return (
-    <div className="App">
-      <h1>Page Count: {count}</h1>
+    <div>
+      <Routes>
+        <Route exact path="/welcome">
+          <Welcome />
+        </Route>
+
+        <Route exact path="/signup">
+          <SignUp />
+        </Route>
+
+        <Route exact path="/login">
+          <Login />
+        </Route>
+
+        <Route exact path="/user/:id/profile">
+          <Profile />
+        </Route>
+
+        <Route exact path="/restaurants">
+          <HomePage />
+        </Route>
+
+      </Routes>
     </div>
-  );
+  )
 }
 
 export default App;
