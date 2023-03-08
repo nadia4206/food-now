@@ -1,5 +1,5 @@
 
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import Login from './components/Login';
 import SignUp from './components/SignUp';
 import Profile from './components/Profile';
@@ -14,7 +14,6 @@ function App() {
 
   return (
     <div>
-      <BrowserRouter>
         <Switch>
           <Route path="/login">
             <Login />
@@ -31,9 +30,7 @@ function App() {
           <Route path="/home">
             <HomePage />
           </Route>
-
         </Switch>
-      </BrowserRouter>
     </div>
   )
 }

@@ -93,7 +93,8 @@ puts "🧀 seeding menu items..."
         {
             delivery_address: Faker::Address.full_address,
             delivery_fee: 4,
-            total_cost: 25
+            total_cost: 25,
+            customer_id: Customer.all.sample.id
         }
     ])
 end
