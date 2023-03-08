@@ -5,7 +5,12 @@ function Login () {
 
     return (
         <div>
-            <h1>Login</h1>
+            <div>
+                <h1>FOOD NOW</h1>
+            </div>
+            <div>
+                <h1>Login</h1>
+            </div>
             <div>
                 <form>
                     <input
