@@ -1,10 +1,11 @@
+import React from "react";
+import AllRestaurants from "./AllRestaurants";
 
-
-function HomePage () {
+function HomePage ({allRestaurants, handleViewMenu}) {
 
     return (
         <div>
-            {/* Display All Restaurants */}
+            <AllRestaurants handleViewMenu={handleViewMenu} allRestaurants={allRestaurants} />
         </div>
     )
 }
