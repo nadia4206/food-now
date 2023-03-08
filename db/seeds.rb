@@ -33,20 +33,40 @@ Customer.create!([
 puts "seeding restaurants..."
     Restaurant.create!([
         {
-            name: "Bogos",
-            address: "123 cherry lane",
-            image_url: "this is an image"
+            name: "Lilia",
+            address: "567 Union Avenue, Brooklyn, NY 11211",
+            image_url: "https://res.cloudinary.com/the-infatuation/image/upload/c_fill,w_1200,ar_4:3,g_auto,f_auto/cms/reviews/lilia/banners/1457463861.74"
         },
         {
-            name: "Devils",
-            address: "456 madison ave",
-            image_url: "this is an image"
+            name: "Llama Inn",
+            address: "50 Withers St, Brooklyn, NY 11211",
+            image_url: "https://res.cloudinary.com/the-infatuation/image/upload/c_fill,w_1200,ar_4:3,g_auto,f_auto/cms/reviews/llama-inn/banners/1455171044.9"
         },
         {
-            name: "help me",
-            address: "789 washington lane",
-            image_url: "this is an image"
+            name: "Four Horsemen",
+            address: "295 Grand St., Brooklyn, NY 11211",
+            image_url: "https://res.cloudinary.com/the-infatuation/image/upload/c_fill,w_1200,ar_4:3,g_auto,f_auto/cms/reviews/four-horsemen/banners/1513024586.68"
         },
+        {
+            name: "Aldama",
+            address: "91 South 6th Street, Williamsburg, New York 11249",
+            image_url: "https://infatuation.imgix.net/media/images/reviews/aldama/banners/1638232312.1251252.png?ar=4%3A3&auto=format&crop=entropy&fit=crop&w=1200&ixlib=react-9.3.0"
+        },
+        {
+            name: "Birds of a Feather",
+            address: "191 Grand St, Brooklyn, NY 11211",
+            image_url: "https://res.cloudinary.com/the-infatuation/image/upload/c_fill,w_1200,ar_4:3,g_auto,f_auto/cms/reviews/birds-of-a-feather/banners/1515619849.19"
+        },
+        {
+            name: "St. Anselm",
+            address: "355 Metropolitan Ave., Brooklyn, NY 11211",
+            image_url: "https://res.cloudinary.com/the-infatuation/image/upload/c_fill,w_1200,ar_4:3,g_auto,f_auto/cms/reviews/st-anselm/banners/1522092080.79"
+        },
+        {
+            name: "Win Son",
+            address: "159 Graham Ave, Brooklyn, NY 11206",
+            image_url: "https://res.cloudinary.com/the-infatuation/image/upload/c_fill,w_1200,ar_4:3,g_auto,f_auto/cms/reviews/win-son/banners/1501685225.81"
+        }
     ])
 
 

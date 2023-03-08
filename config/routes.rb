@@ -4,5 +4,7 @@ Rails.application.routes.draw do
   resources :orders
   resources :items
   resources :customers
-  get '/hello', to: 'application#hello_world'
+
+  get '/restaurants/:id/items', to: "items#show"
+  
 end
