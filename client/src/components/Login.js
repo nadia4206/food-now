@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 
 function Login () {
-
+console.log("hello")
     return (
         <div>
             <div>

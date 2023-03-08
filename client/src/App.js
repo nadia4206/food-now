@@ -1,5 +1,5 @@
 
-import { Switch, Route } from 'react-router-dom';
+import {Route, Routes} from 'react-router-dom';
 import Login from './components/Login';
 import SignUp from './components/SignUp';
 import Profile from './components/Profile';
@@ -14,7 +14,7 @@ function App() {
 
   return (
     <div>
-        <Switch>
+        <Routes>
           <Route path="/login">
             <Login />
           </Route>
@@ -30,7 +30,7 @@ function App() {
           <Route path="/home">
             <HomePage />
           </Route>
-        </Switch>
+        </Routes>
     </div>
   )
 }
