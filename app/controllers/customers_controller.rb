@@ -1,40 +1,29 @@
 class CustomersController < ApplicationController
-
-    def index
-        customers = Customer.all
-        render json: customers, status: :ok
-    end
-
-    def show
-        customer = find_customer
-        render json: :customer, status: :ok
-    end
+    before_action :authorize, only: [:show]
 
     def create
         customer = Customer.create!(customer_params)
-        render json: customer, status: :created
+        if customer.valid?
+            session[:customer_id] = customer.id
+            render json: customer, status: :created
+        else
+            render json: { error: user.errors.full_messages }, status: :unprocessable_entity
+        end
     end
 
-    def update
-        customer = find_customer
-        customer.update!(customer_params)
-        render json: customer, status: :accepted
-    end
-
-    def destroy
-        customer = find_customer
-        customer.destroy
-        head :no_content
+    def show
+        customer = Customer.find(session[:customer_id])
+        render json: customer
     end
 
     private
 
-    def find_customer
-        Customer.find(params[:id])
+    def authorize
+        return render json: { error: "Not authorized" }, status: :unauthorized unless session.include? :customer_id
     end
 
     def customer_params
-        params.permit(:name, :email, :password)
+        params.permit(:name, :email, :username, :password)
     end
 
 end

@@ -1,7 +1,25 @@
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import { useState } from 'react';
 
+function Login ({ setCustomer }) {
+    const [ username, setUsername ] = useState("")
+    const [ password, setPassword ] = useState("")
 
-function Login () {
+    function handleSubmit(e) {
+        e.preventDefault();
+        fetch('/login', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ username, password }),
+        }).then((r) => {
+            if (r.ok) {
+                r.json().then((customer) => setCustomer(customer))
+            }
+        })
+    }
+
 
     return (
         <div>
@@ -12,16 +30,20 @@ function Login () {
                 <h1>Login</h1>
             </div>
             <div>
-                <form>
+                <form onSubmit={handleSubmit}>
                     <input
                         name="username"
                         type="text"
                         placeholder="Username"
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
                     />
                     <input
                         name="password"
                         type="password"
                         placeholder="Password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
                     />
                     <div>
                         <button

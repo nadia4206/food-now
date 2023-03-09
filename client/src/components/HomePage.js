@@ -4,7 +4,7 @@ function HomePage () {
 
     return (
         <div>
-            {/* Display All Restaurants */}
+            Hi From HomePage
         </div>
     )
 }

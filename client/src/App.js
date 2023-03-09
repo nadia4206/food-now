@@ -1,5 +1,6 @@
 
 import { Switch, Route } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import Login from './components/Login';
 import SignUp from './components/SignUp';
 import Profile from './components/Profile';
@@ -12,15 +13,29 @@ import OrderHistory from './components/OrderHistory'
 
 function App() {
 
+  const [ customer, setCustomer ] = useState(null);
+
+  useEffect(() => {
+    // auto-login
+    fetch("/current_customer").then((r) => {
+      if (r.ok) {
+        r.json().then((customer) => setCustomer(customer));
+      }
+    });
+  }, []);
+
   return (
     <div>
         <Switch>
           <Route path="/login">
-            <Login />
+            <Login
+              setCustomer={setCustomer}
+            />
           </Route>
 
           <Route path="/signup">
-            <SignUp />
+            <SignUp
+            />
           </Route>
 
           <Route path="/settings">
