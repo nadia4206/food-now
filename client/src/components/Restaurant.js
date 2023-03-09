@@ -1,16 +1,27 @@
-import React from 'react';
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
-function Restaurant({restaurant, handleViewMenu}) {
-    const {name, address, image_url} = restaurant
+function Home() {
+  const [restaurants, setRestaurants] = useState([]);
 
-    return (
-        <div>
-            <h4>{name}</h4>
-            <p>{address}</p>
-            <p>{image_url}</p>
-            <button onClick={() => handleViewMenu(restaurant)}>View Menu</button>
+  useEffect(() => {
+    fetch("/restaurants")
+      .then((r) => r.json())
+      .then(setRestaurants);
+  }, []);
+
+  return (
+    <section className="container">
+      {restaurants.map((restaurant) => (
+        <div key={restaurant.id} className="card">
+          <h2>
+            <Link to={`/restaurants/${restaurant.id}`}>{restaurant.name}</Link>
+          </h2>
+          <p>Address: {restaurant.address}</p>
         </div>
-    )
+      ))}
+    </section>
+  );
 }
 
-export default Restaurant
+export default Home;

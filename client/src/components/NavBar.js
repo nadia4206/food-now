@@ -1,8 +1,17 @@
+import { Link } from "react-router-dom";
 
-function NavBar() {
+
+function Navbar() {
     return (
-        <div>Hi From Nav</div>
-    )
+    <header>
+        <div className="logo">
+        <h1>Food now</h1>
+        </div>
+        <nav>
+        <Link to="/">Home</Link>
+        </nav>
+    </header>
+    );
 }
 
-export default NavBar;
+export default Navbar;
