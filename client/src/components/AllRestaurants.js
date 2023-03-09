@@ -1,13 +1,13 @@
 import React from 'react';
 import Restaurant from './Restaurant'
 
-function AllRestaurants({allRestaurants, handleViewMenu}) {
+function AllRestaurants({allRestaurants}) {
+    console.log("AllRestaurants")
     return (
         <div className='flex'>
             <div className='flex flex-wrap'>
                 {allRestaurants.map((restaurant) => (
-                <Restaurant 
-                    handleViewMenu={handleViewMenu}
+                <Restaurant
                     key={restaurant.name}
                     restaurant={restaurant}
                 />))}

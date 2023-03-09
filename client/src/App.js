@@ -9,6 +9,7 @@ import OrderHistory from './components/OrderHistory'
 import { useState, useEffect } from 'react';
 import RestaurantItems from './components/RestaurantItems';
 import Restaurant from './components/Restaurant';
+import Navbar from './components/NavBar';
 
 function App() {
   const [allRestaurants, setAllRestaurants] = useState([])
@@ -21,16 +22,17 @@ function App() {
     .then(data => setAllRestaurants(data))
   },[])
   
-  function handleViewMenu (restaurant) {
-    const { name, address, image_url, id } = restaurant
-    fetch(`/restaurants/${id}/items`)
-      .then(resp => resp.json())
-      .then(data => setRestaurantMenu(data))
-      // history.push('/restaurant-menu')
-    }
+  // function handleViewMenu (restaurant) {
+  //   const { id } = restaurant
+  //   fetch(`/restaurants/${id}/items`)
+  //     .then(resp => resp.json())
+  //     .then(data => setRestaurantMenu(data))
+  //     // history.push('/restaurant-menu')
+  //   }
 
   return (
-    <div>
+    <>
+      <Navbar />
         <Switch>
           <Route path="/login">
             <Login />
@@ -45,14 +47,14 @@ function App() {
           </Route>
 
           <Route path="/home">
-            <HomePage handleViewMenu={handleViewMenu} allRestaurants={allRestaurants}/>
+            <Restaurant />
           </Route>
 
-          <Route path="/restaurant-menu">
+          <Route exact path="restaurants/:id">
             <RestaurantItems />
           </Route>
         </Switch>
-    </div>
+    </>
   )
 }
 
