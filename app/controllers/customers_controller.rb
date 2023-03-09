@@ -1,4 +1,5 @@
 class CustomersController < ApplicationController
+    skip_before_action :authorize, only: :create
 
     def index
         customers = Customer.all
@@ -7,11 +8,12 @@ class CustomersController < ApplicationController
 
     def show
         customer = find_customer
-        render json: :customer, status: :ok
+        render json: @current_user, status: :ok
     end
 
     def create
         customer = Customer.create!(customer_params)
+        # session[:customer_id] = customer.id
         render json: customer, status: :created
     end
 
