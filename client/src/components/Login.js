@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import { useHistory, NavLink } from 'react-router-dom';
+import { Redirect, NavLink } from 'react-router-dom';
 
 function Login ({updateUser}) {
     const [formData, setFormData] = useState({
@@ -8,7 +8,7 @@ function Login ({updateUser}) {
     })
     
     const [errors, setErrors] = useState([])
-    let history = useHistory()
+    // let history = useHistory()
     const {email, password} = formData
 
     const handleChange = (e) => {
@@ -30,7 +30,8 @@ function Login ({updateUser}) {
         .then(resp => {
             if(resp.ok){
                 resp.json().then(user => {
-                    history.push(`/`)
+                    <Redirect to="/home"
+                    />
                     updateUser(user)})
                     // updateErrors()
             } else {
@@ -64,10 +65,12 @@ function Login ({updateUser}) {
                         onChange={handleChange}
                     />
                     <div>
+                    <NavLink to="/home">
                         <button
                             type="submit"
                             >Login
                         </button>
+                    </NavLink>
                     </div>
                 </form>
                 {errors? <div>{errors}</div>:null}

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { NavLink } from 'react-router-dom';
 
 function SignUp ({newUser, setCurrentUser}) {
     const [name, setName] = useState('')
@@ -19,7 +20,8 @@ function SignUp ({newUser, setCurrentUser}) {
         })
         .then(resp => resp.json())
         .then(data => {
-            console.log(data)
+            // console.log(data)
+            // REROUTE HERE!!
         })
     }
 
@@ -50,10 +52,13 @@ function SignUp ({newUser, setCurrentUser}) {
                         value={password}
                     />
                     <div>
+                        <NavLink to="/home">
                         <button
                             type="submit"
+                            // onClick={formHandler}
                             >Create Account
                         </button>
+                        </NavLink>
                     </div>
                 </form>
             </div>

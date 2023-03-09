@@ -3,7 +3,7 @@ class SessionsController < ApplicationController
 
   def create
     customer = Customer.find_by(email: params[:email])
-      if user&.authenticate(params[:password])
+      if customer&.authenticate(params[:password])
         session[:customer_id] = customer.id
         render json: customer, status: :created
       else

@@ -1,16 +1,17 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
-function Home() {
+function RestaurantItems() {
   const [{ data: restaurant, error, status }, setRestaurant] = useState({
     data: null,
     error: null,
     status: "pending",
   });
   const { id } = useParams();
-//   const [items, setItems] = useState("")
+  const [items, setItems] = useState("")
 
   useEffect(() => {
+    console.log("hello")
     fetch(`/restaurants/${id}`).then((r) => {
       if (r.ok) {
         r.json().then((restaurant) =>
@@ -22,11 +23,12 @@ function Home() {
         );
       }
     });
-  }, [id]);
+  });
 
- 
   if (status === "pending") return <h1>Loading...</h1>;
   if (status === "rejected") return <h1>Error: {error.error}</h1>;
+
+  console.log(items)
 
   return (
     <section className="container">
@@ -51,4 +53,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default RestaurantItems;

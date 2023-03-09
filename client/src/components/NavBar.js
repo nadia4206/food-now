@@ -6,7 +6,7 @@ function Navbar({currentUser, handleLogout}) {
     <header>
         <div className="logo">
             <h1>Food now</h1>
-        <NavLink to="/">Home</NavLink>
+        <NavLink to="/home">Home</NavLink>
         <NavLink
             to='/cart'
             exact>
