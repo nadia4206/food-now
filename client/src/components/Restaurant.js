@@ -20,7 +20,7 @@ function Home() {
             {/* <RestaurantItems /> */}
             </h2>
             <p>Address: {restaurant.address}</p>
-            {/* <img src={restaurant.image_url}/> */}
+            <img src={restaurant.image_url}/>
         </div>
         ))}
     </section>

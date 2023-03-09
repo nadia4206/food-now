@@ -1,7 +1,43 @@
-import { Link } from 'react-router-dom';
+import React, {useState} from 'react'
+import { useHistory, NavLink } from 'react-router-dom';
 
+function Login ({updateUser}) {
+    const [formData, setFormData] = useState({
+        email:'',
+        password:''
+    })
+    
+    const [errors, setErrors] = useState([])
+    let history = useHistory()
+    const {email, password} = formData
 
-function Login () {
+    const handleChange = (e) => {
+        const { name, value } = e.target
+        setFormData({ ...formData, [name]: value })
+    }
+    
+    function onSubmit(e){
+        e.preventDefault()
+        const user = {
+            email,
+            password
+        }
+        fetch('/login',{
+          method:'POST',
+          headers:{'Content-Type': 'application/json'},
+          body:JSON.stringify(user)
+        })
+        .then(resp => {
+            if(resp.ok){
+                resp.json().then(user => {
+                    history.push(`/`)
+                    updateUser(user)})
+                    // updateErrors()
+            } else {
+                resp.json().then(json => setErrors(json.errors))
+            }
+        })
+    }
 
     return (
         <div>
@@ -9,19 +45,23 @@ function Login () {
                 <h1>FOOD NOW</h1>
             </div>
             <div>
-                <h1>Login</h1>
+                <h2>Login</h2>
             </div>
             <div>
-                <form>
+                <form onSubmit={onSubmit}>
                     <input
-                        name="username"
+                        name="email"
                         type="text"
-                        placeholder="Username"
+                        placeholder="Email"
+                        value={email}
+                        onChange={handleChange}
                     />
                     <input
                         name="password"
                         type="password"
                         placeholder="Password"
+                        value={password}
+                        onChange={handleChange}
                     />
                     <div>
                         <button
@@ -30,13 +70,14 @@ function Login () {
                         </button>
                     </div>
                 </form>
+                {errors? <div>{errors}</div>:null}
                 <div>
-                    <Link to="/signup">
+                    <NavLink to="/signup">
                         <button
                             type="button"
                             >Sign Up!
                         </button>
-                    </Link>
+                    </NavLink>
                 </div>
             </div>
         </div>
