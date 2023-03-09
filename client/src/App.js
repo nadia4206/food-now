@@ -5,7 +5,6 @@ import { useHistory } from 'react-router-dom'
 import Login from './components/Login';
 import SignUp from './components/SignUp';
 import Profile from './components/Profile';
-import HomePage from './components/HomePage'
 import Cart from './components/Cart'
 import OrderHistory from './components/OrderHistory'
 import RestaurantItems from './components/RestaurantItems';
@@ -30,7 +29,7 @@ function App() {
   }
 
   useEffect(() => {
-    fetch("/authorized_user")
+    fetch("http://localhost:4000/authorized_user")
       .then(resp => {
         if(resp.ok){
           resp.json().then(user => {
@@ -56,13 +55,13 @@ function App() {
     .then(window.location.href = '/login')
   }
   
-  function handleViewMenu (restaurant) {
-    const { id } = restaurant
-    fetch(`/restaurants/${id}/items`)
-      .then(resp => resp.json())
-      .then(data => setRestaurantMenu(data))
-      // history.push('/restaurant-menu')
-    }
+  // function handleViewMenu (restaurant) {
+  //   const { id } = restaurant
+  //   fetch(`/restaurants/${id}/items`)
+  //     .then(resp => resp.json())
+  //     .then(data => setRestaurantMenu(data))
+  //     // history.push('/restaurant-menu')
+  //   }
 
   return (
     <>

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import RestaurantItems from './RestaurantItems'
 
-function Home() {
+function Restaurant() {
     const [restaurants, setRestaurants] = useState([]);
 
     useEffect(() => {
@@ -15,16 +15,18 @@ function Home() {
     <section className="container">
         {restaurants.map((restaurant) => (
         <div key={restaurant.id} className="card">
+            <Link to={`/restaurants/${restaurant.id}`}>
             <h2>
-            <Link to={`/restaurants/${restaurant.id}`}>{restaurant.name}</Link>
+            {restaurant.name}
             {/* <RestaurantItems /> */}
             </h2>
             <p>Address: {restaurant.address}</p>
             <img src={restaurant.image_url}/>
+            </Link>
         </div>
         ))}
     </section>
     );
 }
 
-export default Home;
+export default Restaurant;
