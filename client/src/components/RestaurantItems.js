@@ -8,6 +8,7 @@ function Home() {
     status: "pending",
   });
   const { id } = useParams();
+//   const [items, setItems] = useState("")
 
   useEffect(() => {
     fetch(`/restaurants/${id}`).then((r) => {
@@ -35,7 +36,7 @@ function Home() {
       </div>
       <div className="card">
         <h2>Menu</h2>
-        {restaurant.items.map((items) => (
+        {restaurant.map((items) => (
           <div key={items.id}>
             <h3>{items.name}</h3>
             <p>
