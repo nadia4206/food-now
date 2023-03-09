@@ -1,6 +1,7 @@
 
 import { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import Login from './components/Login';
 import SignUp from './components/SignUp';
 import Profile from './components/Profile';
@@ -13,8 +14,8 @@ import Navbar from './components/NavBar';
 
 function App() {
   const [allRestaurants, setAllRestaurants] = useState([])
-  // const [restaurantMenu, setRestaurantMenu] = useState([])
   const [users, setUsers] = useState([])
+  const [restaurantMenu, setRestaurantMenu] = useState([])
   const [currentUser, setCurrentUser] = useState({})
 
   const updateUser = (user) => setCurrentUser(user)
@@ -34,6 +35,7 @@ function App() {
         if(resp.ok){
           resp.json().then(user => {
             updateUser(user)
+            console.log(user)
             fetchRestaurants()
           })
         }
@@ -54,17 +56,17 @@ function App() {
     .then(window.location.href = '/login')
   }
   
-  // function handleViewMenu (restaurant) {
-  //   const { id } = restaurant
-  //   fetch(`/restaurants/${id}/items`)
-  //     .then(resp => resp.json())
-  //     .then(data => setRestaurantMenu(data))
-  //     // history.push('/restaurant-menu')
-  //   }
+  function handleViewMenu (restaurant) {
+    const { id } = restaurant
+    fetch(`/restaurants/${id}/items`)
+      .then(resp => resp.json())
+      .then(data => setRestaurantMenu(data))
+      // history.push('/restaurant-menu')
+    }
 
   return (
     <>
-    {/* <Router> */}
+    <Router>
       <Navbar currentUser={currentUser} handleLogout={handleLogout}/>
         <Switch>
           <Route path="/login">
@@ -91,7 +93,7 @@ function App() {
               <p>Logout</p>
             </Route>
         </Switch>
-      {/* </Router> */}
+      </Router>
     </>
   )
 }

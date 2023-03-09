@@ -1,10 +1,16 @@
 require 'faker'
 
 puts "💣 clearing the database..."
-Customer.destroy_all
-Order.destroy_all
-Item.destroy_all
-
+Customer.delete_all
+Customer.reset_pk_sequence
+Restaurant.delete_all
+Restaurant.reset_pk_sequence
+Item.delete_all
+Item.reset_pk_sequence
+OrderItem.delete_all
+OrderItem.reset_pk_sequence
+Order.delete_all
+Order.reset_pk_sequence
 
 puts "👤 seeding customers..."
 Customer.create!([

@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import { useHistory, Link } from 'react-router-dom';
+import { useHistory, NavLink } from 'react-router-dom';
 
 function Login ({updateUser}) {
     const [formData, setFormData] = useState({
@@ -8,8 +8,13 @@ function Login ({updateUser}) {
     })
     
     const [errors, setErrors] = useState([])
+    let history = useHistory()
     const {email, password} = formData
-    const history = useHistory()
+
+    const handleChange = (e) => {
+        const { name, value } = e.target
+        setFormData({ ...formData, [name]: value })
+    }
     
     function onSubmit(e){
         e.preventDefault()
@@ -17,7 +22,6 @@ function Login ({updateUser}) {
             email,
             password
         }
-        // Logs in user
         fetch('/login',{
           method:'POST',
           headers:{'Content-Type': 'application/json'},
@@ -26,18 +30,13 @@ function Login ({updateUser}) {
         .then(resp => {
             if(resp.ok){
                 resp.json().then(user => {
-                    updateUser(user)
                     history.push(`/`)
-                })
+                    updateUser(user)})
+                    // updateErrors()
             } else {
                 resp.json().then(json => setErrors(json.errors))
             }
         })
-    }
-
-    const handleChange = (e) => {
-        const { name, value } = e.target
-        setFormData({ ...formData, [name]: value })
     }
 
     return (
@@ -73,12 +72,12 @@ function Login ({updateUser}) {
                 </form>
                 {errors? <div>{errors}</div>:null}
                 <div>
-                    <Link to="/signup">
+                    <NavLink to="/signup">
                         <button
                             type="button"
                             >Sign Up!
                         </button>
-                    </Link>
+                    </NavLink>
                 </div>
             </div>
         </div>

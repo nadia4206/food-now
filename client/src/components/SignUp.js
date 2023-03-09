@@ -5,24 +5,21 @@ function SignUp ({newUser, setCurrentUser}) {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
-    const handleSignUp = (e) => {
+    const formHandler = (e) => {
         e.preventDefault()
         const user = {
             name: name,
             email: email,
             password: password
         }
-        fetch('/customers', {
+        fetch('/signup', {
             method: 'POST',
             headers: {"Content-Type" : "application/json"},
             body: JSON.stringify(user)
         })
         .then(resp => resp.json())
-        .then(aNewUser => {
-            newUser(aNewUser)
-            setName('')
-            setEmail('')
-            setPassword('')
+        .then(data => {
+            console.log(data)
         })
     }
 
@@ -30,7 +27,7 @@ function SignUp ({newUser, setCurrentUser}) {
         <div>
             <h1>Sign Up</h1>
             <div>
-                <form onSubmit={handleSignUp}>
+                <form onSubmit={formHandler}>
                     <input
                         name="name"
                         type="text"
