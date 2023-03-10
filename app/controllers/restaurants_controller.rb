@@ -23,12 +23,15 @@ class RestaurantsController < ApplicationController
         restaurant.update!(restaurant_params)
         render json: restaurant, status: :accepted
 
+    def create
+        restaurant = Restaurant.create!(restaurant_params)
+        render json: restaurant, status: :created
     end
 
     private
 
     def restaurant_params
-        params.permit(:id, :name, :address, :rating)
+        params.permit(:name, :address, :image_url, :rating)
     end
 
 end

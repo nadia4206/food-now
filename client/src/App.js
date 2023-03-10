@@ -11,13 +11,15 @@ import RestaurantItems from './components/RestaurantItems';
 import Restaurant from './components/Restaurant';
 import EditRestaurantForm from './components/EditRestaurantForm';
 import Navbar from './components/NavBar';
+import AddRestaurantForm from './components/AddRestaurantForm';
 
 function App() {
   const [allRestaurants, setAllRestaurants] = useState([])
   const [users, setUsers] = useState([])
   const [restaurantMenu, setRestaurantMenu] = useState([])
   const [currentUser, setCurrentUser] = useState({})
-  const [currentRestaurant, setCurrentRestaurant ] = useState()
+  const [rating, setRating] = useState([])
+
 
   const updateUser = (user) => setCurrentUser(user)
   const newUser = (newUser) => {
@@ -27,7 +29,10 @@ function App() {
   const fetchRestaurants = () => {
     fetch("/restaurants")
     .then(resp => resp.json())
-    .then(data => setAllRestaurants(data))
+    .then((data) => {
+      setAllRestaurants(data)
+      setRating(data.rating)
+    })
   }
 
   useEffect(() => {
@@ -48,6 +53,18 @@ function App() {
       .then(resp => resp.json())
       .then(data => setUsers(data))
 }, [])
+
+  function handleAddRestaurant(addedRestaurant) {
+    setAllRestaurants((restaurants) => [...restaurants, addedRestaurant])
+  }
+
+  function handleUpdateRestaurant(updatedRestaurant) {
+    setAllRestaurants((restaurants) =>
+    restaurants.map((restaurant) => {
+        return restaurant.id === updatedRestaurant.id ? updatedRestaurant : restaurant
+      })
+    )
+  }
 
   function handleLogout(){
     fetch("/logout", {
@@ -99,7 +116,8 @@ function App() {
           </Route>
 
           <Route path="/home">
-            <Restaurant />
+            <Restaurant onUpdateRestaurant={handleUpdateRestaurant}/>
+            <AddRestaurantForm onAddRestaurant={handleAddRestaurant}/>
           </Route>
 
           <Route path="/restaurants/:id/edit">
