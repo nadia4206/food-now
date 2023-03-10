@@ -11,6 +11,19 @@ function Restaurant() {
         .then(setRestaurants);
     }, []);
 
+    function handleDelete(id) {
+        fetch(`/restaurants/${id}`, {
+          method: "DELETE",
+        }).then((r) => {
+          if (r.ok) {
+            setRestaurants((restaurants) =>
+              restaurants.filter((restaurant) => restaurant.id !== id)
+            );
+          }
+        });
+      }
+    
+
     return (
     <section className="container">
         {restaurants.map((restaurant) => (
@@ -23,6 +36,7 @@ function Restaurant() {
             <p>Address: {restaurant.address}</p>
             <img src={restaurant.image_url}/>
             </Link>
+            <button onClick={() => handleDelete(restaurant.id)}>Delete</button>
         </div>
         ))}
     </section>

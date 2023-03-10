@@ -3,12 +3,11 @@ import { useParams } from "react-router-dom";
 
 function RestaurantItems() {
   const [restaurant, setRestaurant] = useState({items:[], name:""});
-  // const { id } = useParams();
-  const [items, setItems] = useState("")
+  const { id } = useParams();
+  // const [items, setItems] = useState("")
 
   useEffect(() => {
-    // console.log("hello")
-    fetch("/restaurants/1").then((r) => {
+    fetch(`/restaurants/${id}`).then((r) => {
       if (r.ok) {
         r.json().then((restaurant) =>
           setRestaurant(restaurant)
@@ -21,11 +20,8 @@ function RestaurantItems() {
       }
     });
   }, []);
-
   // if (status === "pending") return <h1>Loading...</h1>;
   // if (status === "rejected") return <h1>Error: {error.error}</h1>;
-
-  console.log(items)
 
   return (
     <section className="container">
@@ -39,13 +35,11 @@ function RestaurantItems() {
           <div key={items.id}>
             <h3>{items.item_name}</h3>
             <p>
-              <em>{items.item_price}</em>
-              {/* <img src={items.image_url}/> */}
+              <em>${items.item_price}</em>
+              <img src={items.item_image}/>
             </p>
           </div>
         ))}
-      </div>
-      <div className="card">
       </div>
     </section>
   );

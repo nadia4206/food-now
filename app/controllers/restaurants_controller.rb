@@ -12,4 +12,10 @@ class RestaurantsController < ApplicationController
         render json: restaurant, serializer: RestaurantMenuSerializer, status: :ok
     end
 
+    def destroy
+        restaurant = Restaurant.find(params[:id])
+        restaurant.destroy
+        head :no_content
+    end
+
 end

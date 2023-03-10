@@ -15,22 +15,22 @@ Order.reset_pk_sequence
 puts "👤 seeding customers..."
 Customer.create!([
     {
-        name: "Tom Anderson",
+        username: "Tom Anderson",
         email: "myspacetom@example.com",
         password: "abc123"
     },
     {
-        name: "Mark Zuckerberg",
+        username: "Mark Zuckerberg",
         email: "markymark@example.com",
         password: "abc123"
     },
     {
-        name: "Tim Cook",
+        username: "Tim Cook",
         email: "timmyc@example.com",
         password: "abc123"
     },
     {
-        name: "Jeff Bezos",
+        username: "Jeff Bezos",
         email: "jbezos@example.com",
         password: "abc123"
     }
@@ -111,6 +111,16 @@ puts "🧀 seeding menu items..."
             restaurant_id:  Restaurant.all.sample.id
         }
     ])
+30.times do
+    Item.create!([
+        {
+            item_name: Faker::Food.dish,
+            item_price: Faker::Commerce.price(range: 15.0..30.0, as_string: false),
+            item_image: Faker::LoremFlickr.image(size: "350x350", search_terms: ['food']),
+            restaurant_id:  Restaurant.all.sample.id
+        }
+    ])
+end
 
     puts "🛍 seeding orders..."
 
