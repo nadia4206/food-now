@@ -30,8 +30,7 @@ function Login ({updateUser}) {
         .then(resp => {
             if(resp.ok){
                 resp.json().then(user => {
-                    <Redirect to="/home"
-                    />
+                    <Redirect to="/home"/>
                     updateUser(user)})
                     // updateErrors()
             } else {
@@ -65,12 +64,12 @@ function Login ({updateUser}) {
                         onChange={handleChange}
                     />
                     <div>
-                    <NavLink to="/home">
+                    {/* <NavLink to="/home"> */}
                         <button
                             type="submit"
                             >Login
                         </button>
-                    </NavLink>
+                    {/* </NavLink> */}
                     </div>
                 </form>
                 {errors? <div>{errors}</div>:null}

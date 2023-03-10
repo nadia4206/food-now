@@ -2,31 +2,28 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 function RestaurantItems() {
-  const [{ data: restaurant, error, status }, setRestaurant] = useState({
-    data: null,
-    error: null,
-    status: "pending",
-  });
-  const { id } = useParams();
+  const [restaurant, setRestaurant] = useState({items:[], name:""});
+  // const { id } = useParams();
   const [items, setItems] = useState("")
 
   useEffect(() => {
-    console.log("hello")
-    fetch(`/restaurants/${id}`).then((r) => {
+    // console.log("hello")
+    fetch("/restaurants/1").then((r) => {
       if (r.ok) {
         r.json().then((restaurant) =>
-          setRestaurant({ data: restaurant, error: null, status: "resolved" })
+          setRestaurant(restaurant)
         );
       } else {
         r.json().then((err) =>
-          setRestaurant({ data: null, error: err.error, status: "rejected" })
+          // setRestaurant()
+          console.log(err)
         );
       }
     });
-  });
+  }, []);
 
-  if (status === "pending") return <h1>Loading...</h1>;
-  if (status === "rejected") return <h1>Error: {error.error}</h1>;
+  // if (status === "pending") return <h1>Loading...</h1>;
+  // if (status === "rejected") return <h1>Error: {error.error}</h1>;
 
   console.log(items)
 
@@ -38,11 +35,12 @@ function RestaurantItems() {
       </div>
       <div className="card">
         <h2>Menu</h2>
-        {restaurant.map((items) => (
+        {restaurant.items.map((items) => (
           <div key={items.id}>
-            <h3>{items.name}</h3>
+            <h3>{items.item_name}</h3>
             <p>
-              <em>{items.ingredients}</em>
+              <em>{items.item_price}</em>
+              {/* <img src={items.image_url}/> */}
             </p>
           </div>
         ))}

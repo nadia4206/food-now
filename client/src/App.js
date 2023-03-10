@@ -84,7 +84,7 @@ function App() {
             <Restaurant />
           </Route>
 
-          <Route exact path="restaurants/:id">
+          <Route exact path="/restaurants/:id">
             <RestaurantItems />
           </Route>
 
