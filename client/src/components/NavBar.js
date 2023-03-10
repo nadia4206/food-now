@@ -5,7 +5,7 @@ function Navbar({currentUser, handleLogout}) {
     return (
     <header>
         <div className="logo">
-            <h1>Food now</h1>
+            <h1>Bites for Later</h1>
         <NavLink to="/home">Home</NavLink>
         <NavLink
             to='/cart'
