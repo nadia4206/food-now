@@ -1,5 +1,5 @@
 class RestaurantsController < ApplicationController
-    skip_before_action :authorize
+    # skip_before_action :authorize
     # comment out after navbar is set up properly!!
 
     def index
@@ -17,6 +17,11 @@ class RestaurantsController < ApplicationController
         restaurant.destroy
         head :no_content
     end
+
+    def update
+        restaurant = Restaurant.find(params[:id])
+        restaurant.update!(restaurant_params)
+        render json: restaurant, status: :accepted
 
     def create
         restaurant = Restaurant.create!(restaurant_params)

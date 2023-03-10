@@ -9,6 +9,7 @@ import Cart from './components/Cart'
 import OrderHistory from './components/OrderHistory'
 import RestaurantItems from './components/RestaurantItems';
 import Restaurant from './components/Restaurant';
+import EditRestaurantForm from './components/EditRestaurantForm';
 import Navbar from './components/NavBar';
 import AddRestaurantForm from './components/AddRestaurantForm';
 
@@ -18,6 +19,7 @@ function App() {
   const [restaurantMenu, setRestaurantMenu] = useState([])
   const [currentUser, setCurrentUser] = useState({})
   const [rating, setRating] = useState([])
+
 
   const updateUser = (user) => setCurrentUser(user)
   const newUser = (newUser) => {
@@ -71,6 +73,22 @@ function App() {
     .then(setCurrentUser(false))
     .then(window.location.href = '/login')
   }
+
+
+  const editRestaurant = (editedRestaurant) => {
+    console.log(allRestaurants)
+    const updatedRestaurants = allRestaurants.map((origRest) => {
+      if (origRest.id === editedRestaurant.id) {
+        return editedRestaurant;
+      } else {
+        return origRest;
+      }
+    });
+      setAllRestaurants(updatedRestaurants)
+  }
+
+  
+
   
   // function handleViewMenu (restaurant) {
   //   const { id } = restaurant
@@ -100,6 +118,12 @@ function App() {
           <Route path="/home">
             <Restaurant onUpdateRestaurant={handleUpdateRestaurant}/>
             <AddRestaurantForm onAddRestaurant={handleAddRestaurant}/>
+          </Route>
+
+          <Route path="/restaurants/:id/edit">
+            <EditRestaurantForm
+              onUpdatedRestaurant={editRestaurant}
+            />
           </Route>
 
           <Route exact path="/restaurants/:id">
