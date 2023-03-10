@@ -9,6 +9,7 @@ import Cart from './components/Cart'
 import OrderHistory from './components/OrderHistory'
 import RestaurantItems from './components/RestaurantItems';
 import Restaurant from './components/Restaurant';
+import editRestaurantForm from './components/editRestaurantForm';
 import Navbar from './components/NavBar';
 
 function App() {
@@ -54,6 +55,19 @@ function App() {
     .then(setCurrentUser(false))
     .then(window.location.href = '/login')
   }
+
+
+  const editRestaurant = (editedRestaurant) => {
+    const updatedRestaurants = allRestaurants.map((origRest) => {
+      if (origRest.id === editedRestaurant.id) {
+        return editedRestaurant;
+      } else {
+        return origRest;
+      }
+    });
+      setAllRestaurants(updatedRestaurants)
+  }
+
   
   // function handleViewMenu (restaurant) {
   //   const { id } = restaurant
@@ -82,6 +96,12 @@ function App() {
 
           <Route path="/home">
             <Restaurant />
+          </Route>
+
+          <Route path="/restaurants/:id/edit">
+            <editRestaurantForm
+              onUpdatedRestaurant={editRestaurant}
+            />
           </Route>
 
           <Route exact path="/restaurants/:id">

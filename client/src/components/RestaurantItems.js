@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 
 function RestaurantItems() {
   const [restaurant, setRestaurant] = useState({items:[], name:""});
@@ -40,8 +40,14 @@ function RestaurantItems() {
             </p>
           </div>
         ))}
+        <Link to={`/restaurants/${restaurant.id}/edit`}>
+      <button>
+        Edit Restaurant
+      </button>
+      </Link>
       </div>
     </section>
+    
   );
 }
 
