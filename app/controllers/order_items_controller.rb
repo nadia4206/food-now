@@ -10,4 +10,15 @@ class OrderItemsController < ApplicationController
         render json: order_item, status: :ok
     end
 
+    def create
+        order_item = OrderItem.create!(order_items_params)
+        render json: order_item, status: :created
+    end
+
+    private
+
+    def order_items_params
+        params.permit(:order_id, :item_id)
+    end
+
 end
