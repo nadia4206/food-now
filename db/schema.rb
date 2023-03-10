@@ -53,6 +53,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_09_122155) do
     t.string "name"
     t.string "address"
     t.string "image_url"
+    t.float "rating"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
