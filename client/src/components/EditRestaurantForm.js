@@ -2,12 +2,14 @@ import { useState, useEffect } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 
 
-function editRestaurantForm ({onUpdatedRestaurant}) {
+function EditRestaurantForm ({onUpdatedRestaurant}) {
+
+    const { id } = useParams()
+
+    console.log(id)
+
+
     let history = useHistory();
-
-    const params = useParams()
-
-    console.log(params)
 
     const [ formData, setFormData ] = useState({
         name: "",
@@ -15,9 +17,6 @@ function editRestaurantForm ({onUpdatedRestaurant}) {
         image_url: "",
         rating: ""
     })
-    
-
-    console.log("hjio")
 
     useEffect(() => {
         fetch(`/restaurants/${id}`)
@@ -32,7 +31,7 @@ function editRestaurantForm ({onUpdatedRestaurant}) {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        fetch(`restaurants/${id}`, {
+        fetch(`/restaurants/${id}`, {
           method: 'PATCH',
           headers: {
            'Content-Type': 'application/json',
@@ -56,7 +55,7 @@ function editRestaurantForm ({onUpdatedRestaurant}) {
                 <label>Restaurant Name</label>
                 <input
                     type="text"
-                    name="restaurant name"
+                    name="name"
                     placeholder="Restaurant Name"
                     value={formData.name}
                     onChange={handleChange}
@@ -70,7 +69,7 @@ function editRestaurantForm ({onUpdatedRestaurant}) {
                 />
                 <input
                     type="text"
-                    name="image"
+                    name="image_url"
                     placeholder="Restaurant Image"
                     value={formData.image_url}
                     onChange={handleChange}
@@ -89,4 +88,4 @@ function editRestaurantForm ({onUpdatedRestaurant}) {
 }
 
 
-export default editRestaurantForm;
+export default EditRestaurantForm;

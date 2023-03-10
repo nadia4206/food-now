@@ -9,7 +9,7 @@ import Cart from './components/Cart'
 import OrderHistory from './components/OrderHistory'
 import RestaurantItems from './components/RestaurantItems';
 import Restaurant from './components/Restaurant';
-import editRestaurantForm from './components/editRestaurantForm';
+import EditRestaurantForm from './components/EditRestaurantForm';
 import Navbar from './components/NavBar';
 
 function App() {
@@ -17,6 +17,7 @@ function App() {
   const [users, setUsers] = useState([])
   const [restaurantMenu, setRestaurantMenu] = useState([])
   const [currentUser, setCurrentUser] = useState({})
+  const [currentRestaurant, setCurrentRestaurant ] = useState()
 
   const updateUser = (user) => setCurrentUser(user)
   const newUser = (newUser) => {
@@ -58,6 +59,7 @@ function App() {
 
 
   const editRestaurant = (editedRestaurant) => {
+    console.log(allRestaurants)
     const updatedRestaurants = allRestaurants.map((origRest) => {
       if (origRest.id === editedRestaurant.id) {
         return editedRestaurant;
@@ -67,6 +69,8 @@ function App() {
     });
       setAllRestaurants(updatedRestaurants)
   }
+
+  
 
   
   // function handleViewMenu (restaurant) {
@@ -99,7 +103,7 @@ function App() {
           </Route>
 
           <Route path="/restaurants/:id/edit">
-            <editRestaurantForm
+            <EditRestaurantForm
               onUpdatedRestaurant={editRestaurant}
             />
           </Route>
