@@ -18,4 +18,15 @@ class RestaurantsController < ApplicationController
         head :no_content
     end
 
+    def create
+        restaurant = Restaurant.create!(restaurant_params)
+        render json: restaurant, status: :created
+    end
+
+    private
+
+    def restaurant_params
+        params.permit(:name, :address, :image_url, :rating)
+    end
+
 end
